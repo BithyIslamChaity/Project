@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './createuser.component.css'
 })
 export class CreateuserComponent implements OnInit{
-u: any;
+u: User = new User('', 0, '', '');
   constructor() {}
   ngOnInit():void{
      console.log('CreateUserComponent');

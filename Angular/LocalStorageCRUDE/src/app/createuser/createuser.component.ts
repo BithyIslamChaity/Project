@@ -15,7 +15,7 @@ isUpdate = false;
 
 constructor(router: Router) {
   const nav = router.getCurrentNavigation();
-  if (nav?.extras.state && nav.extras.state.['user']) {
+  if (nav?.extras.state && nav.extras.state['user']) {
     this.u = nav.extras.state['user'];
     this.isUpdate = true;
   } 

@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
   constructor(private router: Router) { }
 
   editUser(user: User) {
-    this.router.navigate(['/create'], { state: { user } });
+    this.router.navigate(['/createuser'], { state: { user } });
   }
 
   deleteUser(user: User) {

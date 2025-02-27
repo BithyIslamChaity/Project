@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 export class HarryPotterService {
 apiUrl = "https://hp-api.onrender.com/api/spells";
   constructor(private http: HttpClient) { }
-
-  getSpells() : Observable<any> {
-    return this.http.get<any[]>(this.apiUrl);
+  getSpells(): Observable < any > {
+    return this.http.get < any > (this.apiUrl);
 }
 }

@@ -7,7 +7,7 @@ import { HarryPotterService } from '../services/harry-potter.service';
   templateUrl: './harry-potter.component.html',
   styleUrl: './harry-potter.component.css'
 })
-export class HarryPotterComponent implements OnInit {
+export class HarryPotterComponent  {
   spells: any[] = [];
   constructor(private harryPotterService: HarryPotterService) { }
 

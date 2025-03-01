@@ -51,7 +51,18 @@ export class TeacherComponent implements OnInit {
       }
     );
   }
-
+getTeachers() {
+  this.teacherService.getTeachers().subscribe(
+    (data) => {
+      this.teachers = data;
+      console.log('Fetched teacher:', this.teachers);
+    },
+    (error) => {
+      console.error('Error fetching teacher:', error);
+      this.teachers = [];
+    }
+  );
+}
   addTeacher() {
     if (this.newTeacher) {
       if (this.isEditing) {

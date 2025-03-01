@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './teacher.component.css'
 })
 export class TeacherComponent implements OnInit {
+
   teachers: Teacher[] = [];
 
   newTeacher1: Teacher = {
@@ -23,11 +24,9 @@ export class TeacherComponent implements OnInit {
     joiningDate: new Date(),
     isAggressive: false
   };
-
+  modal: bootstrap.Modal | undefined;
   newTeacher: Teacher = new Teacher(0, '', '', false, '', 0, new Date(), false);
-
-  private modal: bootstrap.Modal | null = null;
-
+  isEditing: boolean = false;
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit(): void {
@@ -54,27 +53,60 @@ export class TeacherComponent implements OnInit {
   }
 
   addTeacher() {
-    console.log('Adding teacher:', this.newTeacher);
-    // debugger;
-    this.teacherService.addTeacher(this.newTeacher).subscribe(
-      (response) => {
-        debugger;
-        this.teachers.push(response);
-        this.modal?.hide();
-        this.resetForm();
-      },
-      (error) => {
-        console.error('Error adding teacher:', error);
+    if (this.newTeacher) {
+      if (this.isEditing) {
+        console.log('Updating teacher:', this.newTeacher);
+        this.teacherService.updateTeacher(this.newTeacher).subscribe(
+          (response) => {
+            const index = this.teachers.findIndex(t => t.id === this.newTeacher.id);
+            if (index >= 0) {
+              this.teachers[index] = response;
+            }
+            this.modal?.hide();
+          },
+          (error) => {
+            console.error('Error updating teacher:', error);
+          }
+        );
+      } else {
+        console.log('Adding teacher:', this.newTeacher);
+        this.teacherService.addTeacher(this.newTeacher).subscribe(
+          (response) => {
+            this.teachers.push(response);
+            this.modal?.hide();
+          },
+          (error) => {
+            console.error('Error adding teacher:', error);
+          }
+        );
       }
-    );
+    }
   }
 
-  openModal() {
+  openModal(teacher?: Teacher) {
+    if (teacher) {
+      this.newTeacher = { ...teacher };
+      this.isEditing = true;
+    } else {
+      this.newTeacher = new Teacher(0, '', '', false, '', 0, new Date(), false);
+      this.isEditing = false;
+    }
+
     const modalElement = document.getElementById('teacherModal');
     if (modalElement) {
       this.modal = new bootstrap.Modal(modalElement);
       this.modal.show();
     }
+  }
+  deleteTeacher(id: number) {
+    this.teacherService.deleteTeacher(id).subscribe(
+      () => {
+        this.teachers = this.teachers.filter(t => t.id !== id);
+      },
+      (error) => {
+        console.error('Error deleting teacher:', error);
+      }
+    );
   }
 
   resetForm() {

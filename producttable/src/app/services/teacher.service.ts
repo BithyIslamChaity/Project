@@ -15,4 +15,10 @@ export class TeacherService {
   addTeacher(teacher: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, teacher);
   }
+  updateTeacher(teacher: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${teacher.id}`, teacher);
+  }
+  deleteTeacher(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

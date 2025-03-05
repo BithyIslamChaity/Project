@@ -1,0 +1,38 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact Day</th> <!-- New column for contact day -->
+            <th scope="col">Time</th> <!-- New column for contact time -->
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (user of users; track user) {
+        <tr>
+            <td>{{ users.indexOf(user) + 1 }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.contactDay }}</td> <!-- Display contact day -->
+            <td>{{ user.contactTime }}</td> <!-- Display contact time -->
+            <td>
+                <button type="button" class="btn btn-primary" (click)="editUser(user)">
+                    Update
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

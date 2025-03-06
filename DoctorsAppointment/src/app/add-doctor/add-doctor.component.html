@@ -12,24 +12,18 @@
         </tr>
     </thead>
     <tbody>
-        @for (user of users; track user) {
+        @for (doctor of doctorForm; track doctor) {
         <tr>
-            <td>{{ users.indexOf(user) + 1 }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.age }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.contactDay }}</td> <!-- Display contact day -->
-            <td>{{ user.contactTime }}</td> <!-- Display contact time -->
+            <td>{{ doctorForm.indexOf(doctor) + 1 }}</td>
+            <td>{{ doctor.name }}</td>
+            <td>{{ doctor.age }}</td>
+            <td>{{ doctor.email }}</td>
+            <td>{{ doctor.address }}</td>
+            <td>{{ doctor.contactDay }}</td> <!-- Display contact day -->
+            <td>{{ doctor.contactTime }}</td> <!-- Display contact time -->
             <td>
-                <button type="button" class="btn btn-primary" (click)="editUser(user)">
-                    Update
-                </button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
-                    Delete
-                </button>
+                <button type="button" class="btn btn-primary" >Submit</button>
+                   
             </td>
         </tr>
         }

@@ -10,3 +10,15 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'DoctorsAppointment';
 }
+  export class Doctor {
+    constructor(
+      public id: number,
+      public name: string,
+      public specialty: string,
+      public hireDate: Date,
+      public phone: string,
+      public email: string
+    ) {}
+  }
+  
+
